@@ -14,6 +14,8 @@ export class EmpComponent {
   addMode: boolean = true;
   employees: any[] = [];
   empForm: any;
+  pageSize = 5;
+  currentPage = 1;
 
   constructor(
     private api: ApiService,
@@ -76,5 +78,22 @@ export class EmpComponent {
         this.showEmployees();
       }
     })
+  }
+
+  get totalPages() {
+    return Math.ceil(this.employees.length / this.pageSize);
+  }
+
+  get pagedEmployees() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.employees.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  previousPage() {
+    this.currentPage--;
+  }
+
+  nextPage() {
+    this.currentPage++;
   }
 }

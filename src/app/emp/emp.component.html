@@ -10,6 +10,18 @@
     Hozzáadás
 </button>
 
+<button 
+class="btn btn-primary me-2" 
+(click)="previousPage()"
+[disabled]="currentPage === 1"
+>Előző</button>
+
+<button
+class="btn btn-primary"
+(click)="nextPage()"
+[disabled]="currentPage === totalPages"
+>Következő</button>
+
 <table class="table table-striped">
     <caption>Dolgozók</caption>
     <thead>
@@ -21,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-        @for (emp of employees; track emp) {
+        @for (emp of pagedEmployees; track emp) {
             <tr>
                 <td>{{emp.id}}</td>
                 <td>{{emp.name}}</td>
